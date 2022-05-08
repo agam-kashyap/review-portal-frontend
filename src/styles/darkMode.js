@@ -1,11 +1,11 @@
 export const bgColor = {
     light: 'white',
-    dark: '#171717'
+    dark: '#030116'
 };
 
 export const bgColorAlt = {
     dark: 'white',
-    light: '#171717'
+    light: '#030116'
 };
 
 export const secondaryBg = {

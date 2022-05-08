@@ -1,12 +1,12 @@
-
 import { theme as chakraTheme } from '@chakra-ui/react'
 import { extendTheme } from "@chakra-ui/react"
 import { createBreakpoints } from "@chakra-ui/theme-tools"
+import { globalStyles } from "./styles";
 
 const fonts = {
     ...chakraTheme.fonts,
-    body: `Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
-    heading: `Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
+    body: `Plus Jakarta Sans,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
+    heading: `Plus Jakarta Sans,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`
 }
 
 const breakpoints = createBreakpoints({
@@ -19,6 +19,7 @@ const overrides = {
     ...chakraTheme,
     fonts,
     breakpoints,
+    globalStyles,
     fontWeights: {
         normal: 300,
         medium: 600,

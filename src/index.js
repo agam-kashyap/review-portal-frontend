@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import customTheme from './styles/theme'
 import { Global, css } from '@emotion/react'
-
+import './styles/styles.css'
 
 const GlobalStyle = ({ children }) => {
   const { colorMode } = useColorMode()
@@ -36,7 +36,7 @@ const GlobalStyle = ({ children }) => {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background: ${colorMode === 'light' ? 'white' : '#171717'};
+            background: ${colorMode === 'light' ? 'white' : '#030116'};
           }
         `}
       />
