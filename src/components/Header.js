@@ -1,5 +1,4 @@
 import {
-    Box,
     Button,
     Flex,
     Icon,
@@ -15,13 +14,12 @@ import {
 } from "@chakra-ui/react";
 
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from '@emotion/styled';
 
 import Logo from '../utils/Logo';
 import { VSeparator } from "../utils/Separator";
 import { HamburgerIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
-import { FaGithub } from "react-icons/fa";
 
 const NavContainer = styled(Flex)`
     position: sticky;
@@ -31,8 +29,9 @@ const NavContainer = styled(Flex)`
     transition: background-color 0.1 ease-in-out;
 `;
 
+// Things to do
+// - Change Navbar on Login and change the dropdown for the same
 export default function Navbar(props) {
-    const [scrolled, setScrolled] = useState(false);
     const { colorMode, toggleColorMode } = useColorMode();
     const bg = useColorModeValue('whiteAlpha.500', 'rgba(3,1,22,0.5)');
     
@@ -48,33 +47,10 @@ export default function Navbar(props) {
     );
     
     return (
-        //     alignItems={{ xl: "center" }}
-        //     display={ secondary ? "block" : "flex" }
-        //     minH='75px'
-        //     justifyContent={{ xl: "center" }}
-        //     lineHeight='25.6px'
-        //     mx='auto'
-        //     mt={secondaryMargin}
-            // pb='8px'
-            // left='50%'
-            // transform='translate(-50%,0px)'
-            // px={{ sm: paddingX, md: "10px" }}
-            // ps={{ xl: "12px" }}
-            // pt='8px'
-            // top={{ base: "12px", md: "16px", xl: "18px" }}
-            // w={{
-            //     base: "calc(100vw - 6%)",
-            //     md: "calc(100vw - 8%)",
-            //     lg: "calc(100vw - 6%)",
-            //     xl: "calc(100vw - 250px)",
-            //     "2xl": "1200px"
-            // }}
-        // >
         <NavContainer
             flexDirection="row"
             justifyContent="center"
             alignItems="center"
-            maxWidth="1300px"
             minH='75px'
             width="100%"
             borderRadius='16px'
@@ -86,7 +62,7 @@ export default function Navbar(props) {
             transitionTimingFunction='linear, linear, linear, linear'
             bg={bg}
             as="nav"
-            mt={[0, 2]}
+            mt={2}
             mb={8}
             mx="auto"
             pb='8px'
@@ -99,7 +75,7 @@ export default function Navbar(props) {
                 md: "calc(100vw - 8%)",
                 lg: "calc(100vw - 6%)",
                 xl: "calc(100vw - 250px)",
-                "2xl": "1200px"
+                "2xl": "calc(100vw - 15%)"
             }}
         >
             <Flex
@@ -304,6 +280,8 @@ export default function Navbar(props) {
                     </Stack>
                 </Flex>
             </Flex>
+
+            {/* Add props in Navbar to show this notification */}
             {secondary ? <Text color='white'>{message}</Text> : null}
         </NavContainer>
     );
