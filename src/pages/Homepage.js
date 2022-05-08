@@ -1,4 +1,5 @@
 import {
+    Box,
     useColorMode,
 } from '@chakra-ui/react';
 
@@ -10,7 +11,6 @@ export default function Homepage() {
 
     return (
         <Container>
-            
         </Container>
     );
 }

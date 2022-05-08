@@ -5,7 +5,7 @@ import { primaryTextColor } from '../styles/darkMode';
 const Logo = () => {
     const { colorMode } = useColorMode()
     return (
-        <Box p={8} pb={4}>
+        <Box mx={4} mb={2}>
             <Link href="/">
                 <Heading color={primaryTextColor[colorMode]}>selec.</Heading>
             </Link>

@@ -34,12 +34,11 @@ return (
     role="contentinfo"
     mx="auto"
     maxW="7xl"
-    py="10"
+    py="4"
     px={{
         base: '4',
         md: '8',
     }}
-    mt={12}
 >
         <Stack
             direction={{
