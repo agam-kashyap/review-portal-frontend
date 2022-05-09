@@ -40,7 +40,7 @@ export default function Navbar(props) {
 
     // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
     let textColor = useColorModeValue("secondaryGray.900", "white");
-    let menuBg = useColorModeValue("white", "navy.800");
+    let menuBg = useColorModeValue("white", "#0b1027");
     const shadow = useColorModeValue(
         "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
         "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
@@ -186,7 +186,6 @@ export default function Navbar(props) {
                                 <MenuItem
                                     _hover={{ bg: "none" }}
                                     _focus={{ bg: "none" }}
-                                    color='red.400'
                                     borderRadius='8px'
                                 >
                                     <Link
@@ -203,7 +202,6 @@ export default function Navbar(props) {
                                 <MenuItem
                                     _hover={{ bg: "none" }}
                                     _focus={{ bg: "none" }}
-                                    color='red.400'
                                     borderRadius='8px'
                                 >
                                     <Link
@@ -220,7 +218,6 @@ export default function Navbar(props) {
                                 <MenuItem
                                     _hover={{ bg: "none" }}
                                     _focus={{ bg: "none" }}
-                                    color='red.400'
                                     borderRadius='8px'
                                 >
                                     <Link
