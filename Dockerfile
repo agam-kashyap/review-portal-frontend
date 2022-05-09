@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Cache bursting. Just install dependencies and build on them
 COPY package*.json /app/
-RUN npm install
+RUN npm install --silent
 COPY . .
 
 # --------------------------------------
@@ -15,5 +15,7 @@ COPY . .
 RUN npm run build
 FROM nginx:alpine
 
+# Copying the nginx conf files so that it's in sync with react-router-dom
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Bring the build files and serve using nginx
 COPY --from=build /app/build/ /usr/share/nginx/html
