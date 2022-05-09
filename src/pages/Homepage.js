@@ -21,14 +21,14 @@ export default function Homepage() {
         <Container>
             <Stack
                 align={'center'}
-                spacing={{ base: 8, md: 10 }}
-                direction={{ base: 'column', md: 'row' }}
+                spacing={"5vw"}
+                direction={{ base: 'column', md: 'column', lg: 'row', xl: 'row' }}
                 w={{
                     base: "calc(100vw - 15%)",
                     md: "calc(100vw - 15%)",
                     lg: "calc(100vw - 15%)",
-                    xl: "calc(100vw - 16%)",
-                    "2xl": "calc(100vw - 17%)"
+                    xl: "calc(100vw - 30%)",
+                    "2xl": "calc(100vw - 30%)"
                 }}
                 mt={12}
                 mb={12}
