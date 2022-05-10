@@ -53,7 +53,21 @@ export default function ReviewBlock(props) {
         content,
         tags
     } = props;
+
+    // call upvote API
+    function handleUpvote() {
+        console.log('upvoted')
+        return null
+    }
+
+    // call downvote API
+    function handleDownvote() {
+        console.log('downvoted')
+        return null
+    }
+    
     var score = upvotes-downvotes
+    
     return(
         <Box 
             w={'100%'} 
@@ -135,7 +149,7 @@ export default function ReviewBlock(props) {
 
                 {/* Upvotes */}
                 {/* Things to do;
-                Handle Upvote and Downvote */}
+                Handle Upvote and Downvote, change their colors respectively */}
                 <GridItem 
                     rowSpan={2}
                     colSpan={{ base: 3, sm: 3, md: 1, lg: 1, xl: 1, '2xl': 1 }}
@@ -143,11 +157,21 @@ export default function ReviewBlock(props) {
                 >
                     <IconBox
                         icon={
-                            <Icon w='30px' h='30px' as={BiUpvote} />
+                            <IconButton 
+                                aria-label='upvote' 
+                                icon={<BiUpvote />} 
+                                variant='outline'
+                                onClick={handleUpvote}
+                            />
                         }
                         text={<Text as='span' fontWeight={'extrabold'} fontSize={'lg'}>{score}</Text>}
                         anotherIcon={
-                            <Icon w='30px' h='30px' as={BiDownvote} />
+                            <IconButton 
+                                aria-label='downvote' 
+                                icon={<BiDownvote />} 
+                                variant='outline'
+                                onClick={handleDownvote}
+                            />
                         }
                     />
                 </GridItem>

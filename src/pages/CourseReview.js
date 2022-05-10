@@ -35,7 +35,6 @@ export default function CourseReview(props) {
             >
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '30vw', '2xl': '30vw' }} 
-                    maxH={{ base: '80vh', sm: '80vh', md: '55vh', lg: '55vh', xl: '42vh', '2xl': '42vh' }} 
                     bgColor={useColorModeValue('gray.200', '#00051e')}
                     boxShadow={'2xl'}
                     rounded={'16px'}
@@ -71,16 +70,24 @@ export default function CourseReview(props) {
                             >
                                 Course Instructor(s)
                             </Heading>
-                            <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
-                                T.K. Srikkanth
-                            </Text>
+                            <Stack spacing={'1px'}>
+                                {[
+                                    "T.K Srikkanth",
+                                    "Jaya Sreevalsan Nair"
+                                ].map(
+                                        courses => {return (
+                                            <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
+                                                {courses}
+                                            </Text>
+                                    )}
+                                )}
+                            </Stack>
                         </Stack>                        
                     </Stack>
                 </Box>
 
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '25vw', '2xl': '20vw' }} 
-                    maxH={{ base: '80vh', sm: '80vh', md: '55vh', lg: '55vh', xl: '42vh', '2xl': '42vh' }} 
                     bgColor={useColorModeValue('gray.200', '#00051e')}
                     boxShadow={'2xl'}
                     rounded={'16px'}
@@ -181,7 +188,6 @@ export default function CourseReview(props) {
                 {/* Ratings Aggregate graph */}
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '30vw', '2xl': '30vw' }} 
-                    maxH={{ base: '80vh', sm: '80vh', md: '55vh', lg: '55vh', xl: '42vh', '2xl': '42vh' }} 
                     bgColor={useColorModeValue('gray.200', '#00051e')}
                     boxShadow={'2xl'}
                     rounded={'16px'}
