@@ -51,7 +51,7 @@ export default function PageNotFound() {
                             w={'100%'}
                             h={'100%'}
                             src={
-                                'hero/undraw_page_not_found_re_e9o6.svg'
+                                '/hero/undraw_page_not_found_re_e9o6.svg'
                             }
                         />
                     </Box>
