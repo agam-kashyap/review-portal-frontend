@@ -18,7 +18,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    Flex,
+    SimpleGrid,
     Button
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from "@chakra-ui/icons";
@@ -228,18 +228,12 @@ export default function ProfessorReview(props) {
                                 {rating: 'Awful (1)', score: 5}
                             ].map(
                                 rate => {return (
-                                    // Things to do
-                                    // Add rowspan and fix this
-                                    <Grid 
-                                        templateColumns='repeat(10, 1fr)'
+                                    <SimpleGrid
+                                        columns={2}
                                     >
-                                        <GridItem colSpan={3}>
                                             <Text fontSize='sm' as='p'>{rate.rating}</Text>
-                                        </GridItem>
-                                        <GridItem colSpan={6}>
                                             <Progress size='lg' value={rate.score} max='100'/>    
-                                        </GridItem>
-                                    </Grid>
+                                    </SimpleGrid>
                                 )}
                             )}
                         </Stack>

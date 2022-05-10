@@ -10,9 +10,7 @@ import {
     Divider,
     Tag,
     Progress,
-    Flex,
-    Grid,
-    GridItem
+    SimpleGrid
 } from '@chakra-ui/react'
 import PropTypes from "prop-types";
 import { HSeparator, VSeparator } from "../utils/Separator";
@@ -210,18 +208,12 @@ export default function CourseReview(props) {
                                 {rating: 'Awful (1)', score: 5}
                             ].map(
                                 rate => {return (
-                                    // Things to do
-                                    // Add rowspan and fix this
-                                    <Grid 
-                                        templateColumns='repeat(10, 1fr)'
+                                    <SimpleGrid
+                                        columns={2}
                                     >
-                                        <GridItem colSpan={3}>
-                                            <Text fontSize='sm' as='p'>{rate.rating}</Text>
-                                        </GridItem>
-                                        <GridItem colSpan={6}>
-                                            <Progress size='lg' value={rate.score} max='100'/>    
-                                        </GridItem>
-                                    </Grid>
+                                            <Text fontSize='sm' as='span'>{rate.rating}</Text>
+                                            <Progress size='lg' value={rate.score} max='100'/>
+                                    </SimpleGrid>
                                 )}
                             )}
                         </Stack>
