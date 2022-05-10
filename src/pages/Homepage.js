@@ -61,7 +61,7 @@ export default function Homepage() {
                 </Heading>
                 <Stack spacing={6}>
                 <Text color={secondaryTextColor[colorMode]} fontSize={{ md: 'lg' }} maxW={'2xl'}>
-                    An archive of ratings for courses offered at IIIT Bangalore and their Professors
+                    An archive of ratings for Courses offered at IIIT Bangalore and their Professors.
                 </Text>
                     <Stack
                         direction={{ base: 'column', sm: 'row' }}
@@ -97,7 +97,7 @@ export default function Homepage() {
                         rounded={'full'}
                         _focus={{
                             borderStyle:'solid',
-                            borderColor:useColorModeValue('black', 'black'),
+                            borderColor:useColorModeValue('gray.400', 'gray.800'),
                             rounded:'full',
                         }}
                     />

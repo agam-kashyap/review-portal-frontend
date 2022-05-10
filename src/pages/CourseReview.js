@@ -15,7 +15,8 @@ import {
     GridItem
 } from '@chakra-ui/react'
 import PropTypes from "prop-types";
-import { VSeparator } from "../utils/Separator";
+import { HSeparator, VSeparator } from "../utils/Separator";
+import ReviewBlock from "../components/Review";
 
 import { primaryTextColor, secondaryTextColor } from "../styles/darkMode";
 
@@ -110,7 +111,7 @@ export default function CourseReview(props) {
                                         Overall Course Rating
                                     </Text>
                                 </Stack>
-                                <Divider/>
+                                <HSeparator />
                                 {/* Vertical Separator(Recommended course | Level of Diffiulty) */}
                                 <Stack 
                                     spacing={'10px'} 
@@ -130,7 +131,9 @@ export default function CourseReview(props) {
                                             Recommended by
                                         </Text>
                                     </Stack>
+                                    
                                     <Divider orientation="vertical"/>
+                                    
                                     <Stack spacing={'10px'} align='center'>
                                         {/* Level of difficuly */}
                                         <Heading
@@ -150,15 +153,25 @@ export default function CourseReview(props) {
                             <Stack
                                 direction={{ base: 'column', sm: 'row', md: 'row', lg: 'row', xl: 'row', '2xl': 'row' }} 
                             >
-                                <Tag size={'md'} key={'boring'} variant='solid' colorScheme='red'>
-                                    Boring
-                                </Tag>
-                                <Tag size={'md'} key={'awesome'} variant='solid' colorScheme='green'>
-                                    Awesome
-                                </Tag>
-                                <Tag size={'md'} key={'okayish'} variant='solid' colorScheme='orange'>
-                                    Okayish
-                                </Tag>
+                                {/* Things to do
+                                Fetch these tags from backend */}
+                                {[
+                                    {tagname: 'boring', type: 'bad'},
+                                    {tagname: 'awesome', type: 'good'},
+                                    {tagname: 'okayish', type: 'average'}
+                                ].map(
+                                    tag => {return(
+                                        <Tag size={'md'} key={tag.tagname} variant='solid' 
+                                            colorScheme = {
+                                            tag.type.toLowerCase()=="bad" ? "red" 
+                                            : tag.type.toLowerCase()=='good' ? "green" 
+                                            : "orange"}
+                                        >
+                                                {tag.tagname}
+                                        </Tag>
+                                    )}
+                                )
+                                }
                             </Stack>
                         </Stack>
                     </Stack>
@@ -173,66 +186,38 @@ export default function CourseReview(props) {
                     boxShadow={'2xl'}
                     rounded={'16px'}
                 >   
+                    {/* Things to do
+                    Maybe figure out a way with flex or something for vertical alignment */}
                     <Stack 
                         m={8}
                         spacing={{ base: '6', sm: '6', md: '8', lg: '8', xl: '10', '2xl': '10' }}
                         maxW={{ base: '60vw', sm: '40vw', md: '57vw', lg: '48vw', xl: '28vw', '2xl': '28vw' }}
                     >
                         <Stack>
-                            <Grid 
-                                templateColumns='repeat(10, 1fr)'
-                            >
-                                <GridItem colSpan={3}>
-                                    <Text fontSize='sm' as='span'>Awesome (5)</Text>
-                                </GridItem>
-                                <GridItem colSpan={6}>
-                                    <Progress size='lg' value={64} />    
-                                </GridItem>
-                            </Grid>
-
-                            <Grid 
-                                templateColumns='repeat(10, 1fr)'
-                            >
-                                <GridItem colSpan={3}>
-                                    <Text fontSize='sm' as='span'>Great (4)</Text>
-                                </GridItem>
-                                <GridItem colSpan={6}>
-                                    <Progress size='lg' value={64} />    
-                                </GridItem>
-                            </Grid>
-
-                            <Grid 
-                                templateColumns='repeat(10, 1fr)'
-                            >
-                                <GridItem colSpan={3}>
-                                    <Text fontSize='sm' as='span'>Good (3)</Text>
-                                </GridItem>
-                                <GridItem colSpan={6}>
-                                    <Progress size='lg' value={64} />    
-                                </GridItem>
-                            </Grid>
-
-                            <Grid 
-                                templateColumns='repeat(10, 1fr)'
-                            >
-                                <GridItem colSpan={3}>
-                                    <Text fontSize='sm' as='span'>Okay (2)</Text>
-                                </GridItem>
-                                <GridItem colSpan={6}>
-                                    <Progress size='lg' value={64} />    
-                                </GridItem>
-                            </Grid>
-
-                            <Grid 
-                                templateColumns='repeat(10, 1fr)'
-                            >
-                                <GridItem colSpan={3}>
-                                    <Text fontSize='sm' as='span'>Awful (1)</Text>
-                                </GridItem>
-                                <GridItem colSpan={6}>
-                                    <Progress size='lg' value={64} />    
-                                </GridItem>
-                            </Grid>
+                            {/* Things to do
+                            Fetch this list of ratings */}
+                            {[
+                                {rating: 'Awesome (5)', score: 64},
+                                {rating: 'Great (4)', score: 25},
+                                {rating: 'Good (3)', score: 32},
+                                {rating: 'Okay (2)', score: 1},
+                                {rating: 'Awful (1)', score: 5}
+                            ].map(
+                                rate => {return (
+                                    // Things to do
+                                    // Add rowspan and fix this
+                                    <Grid 
+                                        templateColumns='repeat(10, 1fr)'
+                                    >
+                                        <GridItem colSpan={3}>
+                                            <Text fontSize='sm' as='p'>{rate.rating}</Text>
+                                        </GridItem>
+                                        <GridItem colSpan={6}>
+                                            <Progress size='lg' value={rate.score} max='100'/>    
+                                        </GridItem>
+                                    </Grid>
+                                )}
+                            )}
                         </Stack>
                     
                         <Center>
@@ -249,7 +234,44 @@ export default function CourseReview(props) {
                 </Box>
             </Stack>
 
-            {/* This stack contains regarding reviews for the course */}
+            {/* This box contains regarding reviews for the course */}
+            <Box 
+                w={{ base: '90vw', sm: '85vw', md: '85vw', lg: '85vw', xl: '85vw', '2xl': '85vw' }} 
+                bgColor={useColorModeValue('gray.200', '#00051e')}
+                boxShadow={'2xl'}
+                rounded={'16px'}
+            > 
+                <Stack spacing={6} py={8}>
+                    <Heading
+                        as={'h3'}
+                        size={'md'}
+                        color={primaryTextColor[colorMode]}
+                        px={8}
+                    >
+                        Course Reviews
+                    </Heading>
+
+                    <Stack spacing={4} px={8}>
+                        <ReviewBlock 
+                            quality={4} 
+                            difficulty={3} 
+                            date='07/02/2020'
+                            upvotes='10'
+                            downvotes='5'
+                            recommended={'Yes'}
+                            grading={'Yes'}
+                            attendance={'Yes'}
+                            project={'Yes'}
+                            content={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et tortor nec justo vulputate molestie. Pellentesque venenatis, sem id volutpat venenatis, turpis lorem convallis nisi, porta sollicitudin nisi leo ac ligula. Quisque sed nibh pellentesque, porta leo at, luctus orci. Donec ac varius turpis. Cras et sem sit amet justo aliquam commodo. Integer laoreet et nunc nec laoreet. Cras et interdum metus. Maecenas tempus at risus et bibendum. Nunc vitae nunc nisi. Pellentesque iaculis vel lectus eu semper. Sed euismod eleifend laoreet. Fusce vel nisi est. Praesent nec dolor ac mi condimentum elementum. Proin non iaculis ante, eu tristique velit.'}
+                            tags= {[
+                                {tagname: 'boring', type: 'bad'},
+                                {tagname: 'awesome', type: 'good'},
+                                {tagname: 'okayish', type: 'average'}
+                            ]}
+                        />
+                    </Stack>
+                </Stack>
+            </Box>
         </Container>
     )
 }
