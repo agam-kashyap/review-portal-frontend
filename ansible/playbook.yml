@@ -13,4 +13,4 @@
       shell: docker image rm -f keiserdocker/selec-frontend
 
     - name: Run the new image
-      shell: docker run -d -p 6969:6969 --name selec-frontend keiserdocker/selec-frontend:latest -it
+      shell: docker run -d -p 80:80 --name selec-frontend keiserdocker/selec-frontend:latest
