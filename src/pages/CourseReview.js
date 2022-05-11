@@ -12,16 +12,32 @@ import {
     Progress,
     SimpleGrid
 } from '@chakra-ui/react'
-import PropTypes from "prop-types";
 import { HSeparator, VSeparator } from "../utils/Separator";
 import ReviewBlock from "../components/Review";
+
+import axios from "axios";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom";
 
 import { primaryTextColor, secondaryTextColor } from "../styles/darkMode";
 
 export default function CourseReview(props) {
     const { colorMode } = useColorMode()
-    const { metadata, tag, revievs } = props;
-
+    const [courseData, setCourseData] = useState()
+    const params = useParams();
+    
+    useEffect(() => {
+        axios
+            .get(
+                "http://localhost:3001/courses/"+params.id
+            )
+            .then((res) => {
+                setCourseData(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+    const bg = useColorModeValue('gray.200', '#00051e')
     var tags_list = {
         'Tough Grader': 'bad' ,
         'Get Ready To Read': 'bad' ,
@@ -42,11 +58,11 @@ export default function CourseReview(props) {
         'Graded By Few Things': 'average'
     }
 
-    const professors = [
-        "T.K Srikkanth",
-        "Jaya Sreevalsan Nair"
-    ]
-    const specialisation = "Artificial Intelligence and Machine Learning"
+    // const professors = [
+    //     "T.K Srikkanth",
+    //     "Jaya Sreevalsan Nair"
+    // ]
+    // const specialisation = "Artificial Intelligence and Machine Learning"
     const overall_rating = '5'
     const recommended_by = '50'
     const difficulty_level = '2.5'
@@ -85,6 +101,7 @@ export default function CourseReview(props) {
     ]
 
     return (
+        courseData &&
         <Container>
             {/* This stack contains details regarding the course */}
             <Stack
@@ -95,7 +112,7 @@ export default function CourseReview(props) {
             >
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '30vw', '2xl': '30vw' }} 
-                    bgColor={useColorModeValue('gray.200', '#00051e')}
+                    bgColor={bg}
                     boxShadow={'2xl'}
                     rounded={'16px'}
                     alignItems='center'
@@ -106,7 +123,7 @@ export default function CourseReview(props) {
                         <Stack spacing={2}>
                             {/* Course ID */}
                             <Text as={'span'} color={secondaryTextColor[colorMode]}>
-                                CS101
+                                {courseData._id}
                             </Text>
                             {/* Course Name */}
                             <Heading
@@ -114,11 +131,11 @@ export default function CourseReview(props) {
                                 size={'sm'}
                                 color={primaryTextColor[colorMode]}
                             >
-                                High Performance Computing and Specialisation in some thing related to computing
+                                {courseData.course_name}
                             </Heading>
                             {/* Course Specialisation */}
                             <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
-                                {specialisation}
+                                {courseData.course_specialisation}
                             </Text>
                         </Stack>
 
@@ -131,10 +148,10 @@ export default function CourseReview(props) {
                                 Course Instructor(s)
                             </Heading>
                             <Stack spacing={'1px'}>
-                                {professors.map(
-                                        courses => {return (
+                                {courseData.course_profs.map(
+                                        professor => {return (
                                             <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
-                                                {courses}
+                                                {professor}
                                             </Text>
                                     )}
                                 )}
@@ -145,7 +162,7 @@ export default function CourseReview(props) {
 
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '25vw', '2xl': '20vw' }} 
-                    bgColor={useColorModeValue('gray.200', '#00051e')}
+                    bgColor={bg}
                     boxShadow={'2xl'}
                     rounded={'16px'}
                 >
@@ -244,7 +261,7 @@ export default function CourseReview(props) {
                 {/* Ratings Aggregate graph */}
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '30vw', '2xl': '30vw' }} 
-                    bgColor={useColorModeValue('gray.200', '#00051e')}
+                    bgColor={bg}
                     boxShadow={'2xl'}
                     rounded={'16px'}
                 >   
@@ -287,7 +304,7 @@ export default function CourseReview(props) {
             {/* This box contains regarding reviews for the course */}
             <Box 
                 w={{ base: '90vw', sm: '85vw', md: '85vw', lg: '85vw', xl: '85vw', '2xl': '85vw' }} 
-                bgColor={useColorModeValue('gray.200', '#00051e')}
+                bgColor={bg}
                 boxShadow={'2xl'}
                 rounded={'16px'}
             > 

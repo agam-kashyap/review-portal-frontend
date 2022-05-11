@@ -11,22 +11,24 @@ import {
     Tag,
     Progress,
     Avatar,
-    Grid,
-    GridItem,
     Spacer,
     Menu, 
     MenuButton,
     MenuItem,
     MenuList,
     SimpleGrid,
-    Button
+    Button,
+    Link
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import React, { useEffect, useState } from 'react'
 
+import axios from "axios";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
+
 import { HSeparator } from "../utils/Separator";
 import ProfessorReviewBlock from "../components/ProfessorReviewBlock";
-
 import { primaryTextColor, secondaryTextColor } from "../styles/darkMode";
 
 function truncate(str) {
@@ -38,32 +40,48 @@ function truncate(str) {
 }
 
 export default function ProfessorReview(props) {
+    const [profData, setProfData] = useState()
+    const params = useParams();
+    useEffect(() => {
+        axios
+            .get(
+                "http://localhost:3001/profs/"+params.id
+            )
+            .then((res) => {
+                setProfData(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
     const { colorMode } = useColorMode()
-    const { metadata, tag, reviews } = props;
+    const bg = useColorModeValue('gray.200', '#00051e')
+
     const courses_offered = [
         "High Performance Computing and Specialisation in some thing related to computing",
         "Some random course"
     ]
 
-    const tags_list = [
-        { 'Tough Grader': 'bad' },
-        { 'Get Ready To Read': 'bad' },
-        { 'Participation Matters': 'bad' },
-        { 'Group Projects': 'average' },
-        { 'Amazing Lectures': 'good' },
-        { 'Clear Grading Criteria': 'good' },
-        { 'Gives Good Feedback': 'good' },
-        { 'Inspirational': 'good' },
-        { 'Lots Of Homework': 'bad' },
-        { 'Hilarious': 'average' },
-        { 'Beware Of Surprise Quizzes': 'bad' },
-        { 'So Many Papers': 'bad' },
-        { 'Caring': 'good' },
-        { 'Respected': 'good' },
-        { 'Lecture Heavy': 'bad' },
-        { 'Test Heavy': 'bad' },
-        { 'Graded By Few Things': 'average' }
-    ]
+    var tags_list = {
+        'awesome': 'good',
+        'helpful': 'good',
+        'good Listener': 'good',
+        'Tough Grader': 'bad' ,
+        'Get Ready To Read': 'bad' ,
+        'Participation Matters': 'bad' ,
+        'Group Projects': 'average' ,
+        'Amazing Lectures': 'good' ,
+        'Clear Grading Criteria': 'good' ,
+        'Gives Good Feedback': 'good' ,
+        'Inspirational': 'good' ,
+        'Lots Of Homework': 'bad' ,
+        'Hilarious': 'average' ,
+        'Beware Of Surprise Quizzes': 'bad' ,
+        'So Many Papers': 'bad' ,
+        'Caring': 'good' ,
+        'Respected': 'good' ,
+        'Lecture Heavy': 'bad' ,
+        'Test Heavy': 'bad' ,
+        'Graded By Few Things': 'average'
+    }
 
     const tags = [
         'Graded By Few Things',
@@ -77,6 +95,7 @@ export default function ProfessorReview(props) {
     }
 
     return (
+        profData &&
         <Container>
             {/* This stack contains details regarding the Professor */}
             <Stack
@@ -87,7 +106,7 @@ export default function ProfessorReview(props) {
             >
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '30vw', '2xl': '30vw' }} 
-                    bgColor={useColorModeValue('gray.200', '#00051e')}
+                    bgColor={bg}
                     boxShadow={'2xl'}
                     rounded={'16px'}
                     alignItems='center'
@@ -97,13 +116,13 @@ export default function ProfessorReview(props) {
                     <Stack p='8' spacing={'8'}>
                         <Stack spacing={4} direction='row' align={'center'}>
                             {/* Professor Name */}
-                            <Avatar name='T.K Srikkanth'/>
+                            <Avatar name={profData.prof_name}/>
                             <Heading
                                 as={'h2'}
                                 size={'lg'}
                                 color={primaryTextColor[colorMode]}
                             >
-                                T.K Srikkanth
+                                {profData.prof_name}
                             </Heading>
                         </Stack>
                         
@@ -118,11 +137,13 @@ export default function ProfessorReview(props) {
                                 Courses taught
                             </Heading>
                             <Stack spacing={'4px'}>
-                                {courses_offered.map(
+                                {profData.prof_courses.map(
                                         courses => {return (
-                                            <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
-                                                {courses}
-                                            </Text>
+                                            <Link href={'/course/'+courses}>
+                                                <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
+                                                    {courses}
+                                                </Text>
+                                            </Link>
                                     )}
                                 )}
                             </Stack>
@@ -132,7 +153,7 @@ export default function ProfessorReview(props) {
 
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '25vw', '2xl': '20vw' }} 
-                    bgColor={useColorModeValue('gray.200', '#00051e')}
+                    bgColor={bg}
                     boxShadow={'2xl'}
                     rounded={'16px'}
                 >
@@ -148,12 +169,14 @@ export default function ProfessorReview(props) {
                             <Stack spacing={'18px'} align='center'>
                                 <Stack spacing={'10px'} align='center'>
                                     {/* Professor Rating */}
+                                    {/* Things to do
+                                    This value is not present in backend, fix it */}
                                     <Heading
                                         as={'h3'}
                                         size={'2xl'}
                                         color={primaryTextColor[colorMode]}
                                     >
-                                        5 
+                                        {profData.prof_qual.$numberDecimal} 
                                         <Text as='sup' fontSize='sm' color={secondaryTextColor[colorMode]}>
                                             /5
                                         </Text>
@@ -176,7 +199,7 @@ export default function ProfessorReview(props) {
                                             size={'2xl'}
                                             color={primaryTextColor[colorMode]}
                                         >
-                                            50%
+                                            {profData.prof_takeAgain} 
                                         </Heading>
                                         <Text as={'span'} color={secondaryTextColor[colorMode]} fontSize={'sm'}>
                                             Recommended by
@@ -192,7 +215,7 @@ export default function ProfessorReview(props) {
                                             size={'2xl'}
                                             color={primaryTextColor[colorMode]}
                                         >
-                                            2.5
+                                            {profData.prof_diff.$numberDecimal} 
                                         </Heading>
                                         <Text as={'span'} color={secondaryTextColor[colorMode]} fontSize={'sm'}>
                                             Level of difficulty
@@ -206,8 +229,9 @@ export default function ProfessorReview(props) {
                             >
                                 {/* Things to do
                                 Fetch these tags from backend */}
-                                {tags.map(
+                                {profData.prof_tags.map(
                                     tag => {
+                                        console.log(tag, tags_list, tags_list[tag])
                                         var tag_type = tags_list[tag]
                                         return(
                                             <Tag size={'md'} key={tag} variant='solid' 
@@ -230,7 +254,7 @@ export default function ProfessorReview(props) {
                 {/* Ratings Aggregate graph */}
                 <Box 
                     w={{ base: '70vw', sm: '50vw', md: '60vw', lg: '50vw', xl: '30vw', '2xl': '30vw' }} 
-                    bgColor={useColorModeValue('gray.200', '#00051e')}
+                    bgColor={bg}
                     boxShadow={'2xl'}
                     rounded={'16px'}
                 >   
@@ -279,7 +303,7 @@ export default function ProfessorReview(props) {
             {/* This box contains regarding reviews for the Professor */}
             <Box 
                 w={{ base: '90vw', sm: '85vw', md: '85vw', lg: '85vw', xl: '85vw', '2xl': '85vw' }} 
-                bgColor={useColorModeValue('gray.200', '#00051e')}
+                bgColor={bg}
                 boxShadow={'2xl'}
                 rounded={'16px'}
             > 
@@ -338,9 +362,9 @@ export default function ProfessorReview(props) {
                             project={'Yes'}
                             content={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et tortor nec justo vulputate molestie. Pellentesque venenatis, sem id volutpat venenatis, turpis lorem convallis nisi, porta sollicitudin nisi leo ac ligula. Quisque sed nibh pellentesque, porta leo at, luctus orci. Donec ac varius turpis. Cras et sem sit amet justo aliquam commodo. Integer laoreet et nunc nec laoreet. Cras et interdum metus. Maecenas tempus at risus et bibendum. Nunc vitae nunc nisi. Pellentesque iaculis vel lectus eu semper. Sed euismod eleifend laoreet. Fusce vel nisi est. Praesent nec dolor ac mi condimentum elementum. Proin non iaculis ante, eu tristique velit.'}
                             tags= {[
-                                {tagname: 'boring', type: 'bad'},
-                                {tagname: 'awesome', type: 'good'},
-                                {tagname: 'okayish', type: 'average'}
+                                'Gives Good Feedback',
+                                'Caring',
+                                'Respected'
                             ]}
                         />
                     </Stack>
