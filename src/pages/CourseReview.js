@@ -20,7 +20,45 @@ import { primaryTextColor, secondaryTextColor } from "../styles/darkMode";
 
 export default function CourseReview(props) {
     const { colorMode } = useColorMode()
-    const { metadata, tags, reviews } = props;
+    const { metadata, tag, revievs } = props;
+    const professors = [
+        "T.K Srikkanth",
+        "Jaya Sreevalsan Nair"
+    ]
+    const specialisation = "Artificial Intelligence and Machine Learning"
+    const overall_rating = '5'
+    const recommended_by = '50'
+    const difficulty_level = '2.5'
+    const tags = [
+        {tagname: 'boring', type: 'bad'},
+        {tagname: 'awesome', type: 'good'},
+        {tagname: 'okayish', type: 'average'}
+    ]
+    const rating_summary = [
+        {rating: 'Awesome (5)', score: 64},
+        {rating: 'Great (4)', score: 25},
+        {rating: 'Good (3)', score: 32},
+        {rating: 'Okay (2)', score: 1},
+        {rating: 'Awful (1)', score: 5}
+    ]
+    const reviews = [
+        {
+            quality:4, 
+            difficulty:3, 
+            date:'07/02/2020',
+            upvotes:'10',
+            downvotes:'5',
+            recommended:'Yes',
+            grading:'Yes',
+            attendance:'Yes',
+            project:'Yes',
+            content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et tortor nec justo vulputate molestie. Pellentesque venenatis, sem id volutpat venenatis, turpis lorem convallis nisi, porta sollicitudin nisi leo ac ligula. Quisque sed nibh pellentesque, porta leo at, luctus orci. Donec ac varius turpis. Cras et sem sit amet justo aliquam commodo. Integer laoreet et nunc nec laoreet. Cras et interdum metus. Maecenas tempus at risus et bibendum. Nunc vitae nunc nisi. Pellentesque iaculis vel lectus eu semper. Sed euismod eleifend laoreet. Fusce vel nisi est. Praesent nec dolor ac mi condimentum elementum. Proin non iaculis ante, eu tristique velit.',
+            tags: [
+                {tagname: 'boring', type: 'bad'},
+                {tagname: 'awesome', type: 'good'},
+                {tagname: 'okayish', type: 'average'}
+        ]}
+    ]
 
     return (
         <Container>
@@ -56,7 +94,7 @@ export default function CourseReview(props) {
                             </Heading>
                             {/* Course Specialisation */}
                             <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
-                                Artificial Intelligence and Machine Learning
+                                {specialisation}
                             </Text>
                         </Stack>
 
@@ -69,10 +107,7 @@ export default function CourseReview(props) {
                                 Course Instructor(s)
                             </Heading>
                             <Stack spacing={'1px'}>
-                                {[
-                                    "T.K Srikkanth",
-                                    "Jaya Sreevalsan Nair"
-                                ].map(
+                                {professors.map(
                                         courses => {return (
                                             <Text fontSize={"xs"} as={'span'} color={secondaryTextColor[colorMode]}>
                                                 {courses}
@@ -107,7 +142,7 @@ export default function CourseReview(props) {
                                         size={'2xl'}
                                         color={primaryTextColor[colorMode]}
                                     >
-                                        5 
+                                        {overall_rating}
                                         <Text as='sup' fontSize='sm' color={secondaryTextColor[colorMode]}>
                                             /5
                                         </Text>
@@ -130,7 +165,7 @@ export default function CourseReview(props) {
                                             size={'2xl'}
                                             color={primaryTextColor[colorMode]}
                                         >
-                                            50%
+                                            {recommended_by+'%'}
                                         </Heading>
                                         <Text as={'span'} color={secondaryTextColor[colorMode]} fontSize={'sm'}>
                                             Recommended by
@@ -146,7 +181,7 @@ export default function CourseReview(props) {
                                             size={'2xl'}
                                             color={primaryTextColor[colorMode]}
                                         >
-                                            2.5
+                                            {difficulty_level}
                                         </Heading>
                                         <Text as={'span'} color={secondaryTextColor[colorMode]} fontSize={'sm'}>
                                             Level of difficulty
@@ -160,11 +195,7 @@ export default function CourseReview(props) {
                             >
                                 {/* Things to do
                                 Fetch these tags from backend */}
-                                {[
-                                    {tagname: 'boring', type: 'bad'},
-                                    {tagname: 'awesome', type: 'good'},
-                                    {tagname: 'okayish', type: 'average'}
-                                ].map(
+                                {tags.map(
                                     tag => {return(
                                         <Tag size={'md'} key={tag.tagname} variant='solid' 
                                             colorScheme = {
@@ -200,13 +231,7 @@ export default function CourseReview(props) {
                         <Stack>
                             {/* Things to do
                             Fetch this list of ratings */}
-                            {[
-                                {rating: 'Awesome (5)', score: 64},
-                                {rating: 'Great (4)', score: 25},
-                                {rating: 'Good (3)', score: 32},
-                                {rating: 'Okay (2)', score: 1},
-                                {rating: 'Awful (1)', score: 5}
-                            ].map(
+                            {rating_summary.map(
                                 rate => {return (
                                     <SimpleGrid
                                         columns={2}
@@ -250,23 +275,24 @@ export default function CourseReview(props) {
                     </Heading>
 
                     <Stack spacing={4} px={8}>
-                        <ReviewBlock 
-                            quality={4} 
-                            difficulty={3} 
-                            date='07/02/2020'
-                            upvotes='10'
-                            downvotes='5'
-                            recommended={'Yes'}
-                            grading={'Yes'}
-                            attendance={'Yes'}
-                            project={'Yes'}
-                            content={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et tortor nec justo vulputate molestie. Pellentesque venenatis, sem id volutpat venenatis, turpis lorem convallis nisi, porta sollicitudin nisi leo ac ligula. Quisque sed nibh pellentesque, porta leo at, luctus orci. Donec ac varius turpis. Cras et sem sit amet justo aliquam commodo. Integer laoreet et nunc nec laoreet. Cras et interdum metus. Maecenas tempus at risus et bibendum. Nunc vitae nunc nisi. Pellentesque iaculis vel lectus eu semper. Sed euismod eleifend laoreet. Fusce vel nisi est. Praesent nec dolor ac mi condimentum elementum. Proin non iaculis ante, eu tristique velit.'}
-                            tags= {[
-                                {tagname: 'boring', type: 'bad'},
-                                {tagname: 'awesome', type: 'good'},
-                                {tagname: 'okayish', type: 'average'}
-                            ]}
-                        />
+                        {reviews.map(
+                            review => {
+                                return (
+                                    <ReviewBlock 
+                                        quality={review.quality} 
+                                        difficulty={review.difficulty} 
+                                        date={review.date}
+                                        upvotes={review.upvotes}
+                                        downvotes={review.downvotes}
+                                        recommended={review.recommended}
+                                        grading={review.grading}
+                                        attendance={review.attendance}
+                                        project={review.project}
+                                        content={review.content}
+                                        tags={review.tags}
+                                    />
+                            )}
+                        )}
                     </Stack>
                 </Stack>
             </Box>
