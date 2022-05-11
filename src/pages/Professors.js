@@ -8,29 +8,35 @@ import {
     Heading,
     useColorMode
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Container from "../components/Container";
 import ProfCard from '../components/ProfCard';
 import { primaryTextColor, secondaryTextColor } from '../styles/darkMode';
 import { Search2Icon } from '@chakra-ui/icons'
 
+import axios from "axios";
+
 export default function Professors(props) {
     const { colorMode } = useColorMode();
     const [searchValue, setSearchValue] = useState('');
+    const [professors, setProfessors] = useState([])
+
+    useEffect(() => {
+        axios
+            .get(
+                "http://localhost:3001/profs"
+            )
+            .then((res) => {
+                setProfessors(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
     const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('').map((c) => c.toUpperCase());
-    // Things to do
-    // Pull this data from backend
-    const professors = [
-        { name: 'Chandrashekhar Ramanathan', email: 'rc@iiitb.ac.in', id: '1' },
-        { name: 'B Thangaraju', email: 'bt@iiitb.ac.in', id: '2' },
-        { name: 'Chandramouleeshwaran Shankaran', email: 'cr@iiitb.ac.in', id: '3' },
-        { name: 'Srinath Srinivasa', email: 'sri@iiitb.ac.in', id: '4' }
-    ];
 
     const searchedProfs = professors.filter(
-        obj => obj.name.toLowerCase().includes(searchValue.toLowerCase())
+        obj => obj.prof_name.toLowerCase().includes(searchValue.toLowerCase())
     )
     return (
         <Container>
@@ -62,7 +68,7 @@ export default function Professors(props) {
             >
                 {alphabets.map(
                     alphabet => {
-                    var filtered_profs = searchedProfs.filter(obj => obj.name.startsWith(alphabet))
+                    var filtered_profs = searchedProfs.filter(obj => obj.prof_name.startsWith(alphabet))
                     return (
                         (filtered_profs.length>0) && 
                         <Stack 
@@ -82,13 +88,15 @@ export default function Professors(props) {
                                 gap={3}
                             >
                                 {/* Professor card */}
+                                {/* Things to do
+                                Backend add email in modal */}
                                 {filtered_profs.map(
                                     prof => {
                                         return (
                                             <ProfCard 
-                                                name={prof.name}
-                                                email={prof.email}
-                                                id={prof.id}
+                                                name={prof.prof_name}
+                                                email={prof.prof_name.slice(0,5)+'iiitb.ac.in'}
+                                                id={prof._id}
                                             />
                                         )
                                     }
