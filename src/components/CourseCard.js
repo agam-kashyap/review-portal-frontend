@@ -88,8 +88,7 @@ export default function CourseCard(props) {
                                 lg: "row",
                                 xl: "column",
                                 "2xl": "row",
-                            }}
-                            mt='25px'>
+                            }}>
                             <Text
                                 color='secondaryGray.600'
                                 fontSize={{

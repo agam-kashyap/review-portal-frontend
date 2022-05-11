@@ -11,6 +11,8 @@ import CourseReview from "./pages/CourseReview";
 import ProfessorReview from "./pages/ProfessorReview";
 import Courses from "./pages/Courses";
 import Professors from "./pages/Professors";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
 function App() {
     return ( 
@@ -21,6 +23,8 @@ function App() {
                 <Route path = "/professor" element = { <ProfessorReview /> } />
                 <Route path = "/courses" element = { <Courses /> } />
                 <Route path = "/professors" element = { <Professors /> } />
+                <Route path = "/signup" element = { <SignUp /> } />
+                <Route path = "/login" element = { <Login /> } />
                 <Route path = "*" element = { <PageNotFound /> } />
             </Routes>
         </BrowserRouter>
