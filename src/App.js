@@ -9,6 +9,7 @@ import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 import CourseReview from "./pages/CourseReview";
 import ProfessorReview from "./pages/ProfessorReview";
+import Courses from "./pages/Courses";
 import Professors from "./pages/Professors";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 <Route path = "/" element = { <Homepage /> } /> 
                 <Route path = "/course" element = { <CourseReview /> } />
                 <Route path = "/professor" element = { <ProfessorReview /> } />
+                <Route path = "/courses" element = { <Courses /> } />
                 <Route path = "/professors" element = { <Professors /> } />
                 <Route path = "*" element = { <PageNotFound /> } />
             </Routes>
