@@ -24,14 +24,14 @@ text-decoration: none;
 `;
 
 export default function CourseCard(props) {
-    const { name, specialisation, image } = props;
+    const { id, name, specialisation, image } = props;
 
     const { colorMode } = useColorMode();
     const textColor = useColorModeValue("navy.700", "white");
 
     return (
         <StyledLink
-            href={'/professor/' + name}
+            href={'/course/' + id}
         >
             <Card
                 p='20px'
