@@ -45,7 +45,7 @@ export function NewCard({ children }) {
 // course_tags
 
 export default function ReviewForm(props) {
-    // Can choose to load some data from API like course_name
+    // Load this data from API
     const {
         course_name,
         course_quality,
@@ -296,7 +296,7 @@ export default function ReviewForm(props) {
                     onClick={handleFormSubmit}
                     type='submit'
                 >
-                    Submit
+                    Update
             </Button>
         </Container>
     )
