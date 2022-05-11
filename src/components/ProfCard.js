@@ -43,9 +43,8 @@ export default function ProfCard(props) {
                 _hover={{
                     boxShadow: shadowColorAlt[colorMode]
                 }}
-                w='max-content'
             >
-                <Flex direction={{ base: "column" }} justify='center'>
+                <Flex direction={{ base: "column" }} justify='center' w="-moz-fit-content">
                     <HStack spacing={5}>
                     <Avatar name={name}/>
                     <Flex flexDirection='column' justify='space-between' h='100%'>

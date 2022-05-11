@@ -78,7 +78,7 @@ export default function Professors(props) {
                                 {alphabet}
                             </Heading>
                             <SimpleGrid
-                                columns={{ base: 1, sm: 2, md: 2, lg: 4, xl: 4, "2xl": 4 }}
+                                columns={{ base: 1, sm: 2, md: 2, lg: 3, xl: 3, "2xl": 4 }}
                                 gap={3}
                             >
                                 {/* Professor card */}

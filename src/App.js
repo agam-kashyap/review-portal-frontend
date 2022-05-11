@@ -13,6 +13,7 @@ import Courses from "./pages/Courses";
 import Professors from "./pages/Professors";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import ReviewForm from "./pages/ReviewForm";
 
 function App() {
     return ( 
@@ -25,6 +26,7 @@ function App() {
                 <Route path = "/professors" element = { <Professors /> } />
                 <Route path = "/signup" element = { <SignUp /> } />
                 <Route path = "/login" element = { <Login /> } />
+                <Route path = "/add-review" element = { <ReviewForm /> } />
                 <Route path = "*" element = { <PageNotFound /> } />
             </Routes>
         </BrowserRouter>

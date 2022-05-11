@@ -11,6 +11,8 @@ import {
 import Container from '../components/Container';
 import { SiMicrosoftoutlook } from "react-icons/si";
 
+// Things to do
+// Verify using a link
 export default function SignUp() {
     const outlookBg = "#005A9F";
     const outlookText = "gray.100";
