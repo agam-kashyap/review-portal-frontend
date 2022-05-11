@@ -90,6 +90,38 @@ export default function ReviewForm(props) {
     'Test Heavy',
     'Graded By Few Things']
 
+    const teaching_labels = {
+        "1": "Awful",
+        "2": "Ok",
+        "3": "Good",
+        "4": "Great",
+        "5": "Awesome"
+    };
+
+    const teaching_fillColor = {
+        "1": "red" ,
+        "2": "coral" ,
+        "3": "orange" ,
+        "4": "teal" ,
+        "5": "green"
+    }
+
+    const difficulty_labels = {
+        "1": "No Effort",
+        "2": "Easy",
+        "3": "Medium",
+        "4": "Hard",
+        "5": "Very Hard"
+    };
+
+    const difficulty_fillColor = {
+        "5": "red" ,
+        "4": "coral" ,
+        "3": "orange" ,
+        "2": "teal" ,
+        "1": "green"
+    }
+
     const checkboxLimit = 3
 
     const [difficulty, setDifficulty] = useState(course_difficulty);
@@ -109,8 +141,12 @@ export default function ReviewForm(props) {
     const [tags, setTags] = useState((course_tags) => course_tags==undefined?[]:course_tags);
     const [review, setReview] = useState(course_review);
 
-    console.log(review)
-
+    function handleFormSubmit() {
+        console.log(
+            recommended, attendance, cpReqd, review, attendance, grade, tags
+        )
+    }
+    
     return (
         <Container>
             <Stack spacing={8}>
@@ -136,14 +172,24 @@ export default function ReviewForm(props) {
                     <NewCard key='course_difficulty'>
                         <FormControl isRequired>
                             <FormLabel as='legend'>Rate course difficulty</FormLabel>
-                            <Rating id='course_difficulty' rate={difficulty} setRate={handleDifficultyChange} />
+                            <Rating id='course_difficulty' 
+                                labels={difficulty_labels}
+                                fillColor={difficulty_fillColor}
+                                rate={difficulty} 
+                                setRate={handleDifficultyChange} 
+                            />
                         </FormControl>
                     </NewCard>
 
                     <NewCard key='course_quality'>
                         <FormControl isRequired>
                             <FormLabel as='legend'>Rate course quality</FormLabel>
-                            <Rating id='course_quality' rate={quality} setRate={handleQualityChange} />
+                            <Rating id='course_quality' 
+                                labels={teaching_labels}
+                                fillColor={teaching_fillColor}
+                                rate={quality} 
+                                setRate={handleQualityChange} 
+                            />
                         </FormControl>
                     </NewCard>
                 </SimpleGrid>
@@ -247,7 +293,7 @@ export default function ReviewForm(props) {
                     maxW={20}
                     colorScheme='teal'
                     // isLoading={isSubmitting}
-                    // onClick={handleFormSubmit}
+                    onClick={handleFormSubmit}
                     type='submit'
                 >
                     Submit

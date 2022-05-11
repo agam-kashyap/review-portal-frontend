@@ -3,28 +3,13 @@ import { Box, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { StarIcon } from '@chakra-ui/icons';
 
 const Rating = React.forwardRef(
-    ({ size, rate, setRate }, ref) => {
+    ({ labels, fillColor, size, rate, setRate }, ref) => {
         const buttons = [];
 
         useEffect(() => {
                 setRate(rate)
             }
         )
-        const labels = {
-            "1": "Awful",
-            "2": "Ok",
-            "3": "Good",
-            "4": "Great",
-            "5": "Awesome"
-        };
-        
-        const fillColor = {
-            "1": "red" ,
-            "2": "coral" ,
-            "3": "orange" ,
-            "4": "teal" ,
-            "5": "green"
-        }
 
         const onClick = idx => {
             if (!isNaN(idx)) {
