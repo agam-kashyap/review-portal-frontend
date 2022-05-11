@@ -37,3 +37,7 @@ docker run -p 8080:80 keiserdocker/selec-frontend:latest
 ```
 
 Find the docker image on https://hub.docker.com/r/keiserdocker/selec-frontend
+
+## Disclaimer
+
+The website was not developed keeping UI/UX in utmost concern. Please pardon if there are any overlapping cards or some horrible UI. However, if you want to contribute, hop on to the Issues tab create an issue and open a PR.
