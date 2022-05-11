@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Stop Container
+      shell: docker stop selec-frontend
+
+    - name: Remove Container
+      shell: docker rm -f selec-frontend
+
+    - name: Delete Image
+      shell: docker image rm -f keiserdocker/selec-frontend
+
+    - name: Run the new image
+      shell: docker run -d -p 6969:6969 --name selec-frontend keiserdocker/selec-frontend:latest -it
