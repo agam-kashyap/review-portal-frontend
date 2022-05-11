@@ -21,6 +21,27 @@ import { primaryTextColor, secondaryTextColor } from "../styles/darkMode";
 export default function CourseReview(props) {
     const { colorMode } = useColorMode()
     const { metadata, tag, revievs } = props;
+
+    var tags_list = {
+        'Tough Grader': 'bad' ,
+        'Get Ready To Read': 'bad' ,
+        'Participation Matters': 'bad' ,
+        'Group Projects': 'average' ,
+        'Amazing Lectures': 'good' ,
+        'Clear Grading Criteria': 'good' ,
+        'Gives Good Feedback': 'good' ,
+        'Inspirational': 'good' ,
+        'Lots Of Homework': 'bad' ,
+        'Hilarious': 'average' ,
+        'Beware Of Surprise Quizzes': 'bad' ,
+        'So Many Papers': 'bad' ,
+        'Caring': 'good' ,
+        'Respected': 'good' ,
+        'Lecture Heavy': 'bad' ,
+        'Test Heavy': 'bad' ,
+        'Graded By Few Things': 'average'
+    }
+
     const professors = [
         "T.K Srikkanth",
         "Jaya Sreevalsan Nair"
@@ -29,11 +50,13 @@ export default function CourseReview(props) {
     const overall_rating = '5'
     const recommended_by = '50'
     const difficulty_level = '2.5'
+    
     const tags = [
-        {tagname: 'boring', type: 'bad'},
-        {tagname: 'awesome', type: 'good'},
-        {tagname: 'okayish', type: 'average'}
+        'Graded By Few Things',
+        'Beware Of Surprise Quizzes',
+        'Test Heavy'
     ]
+
     const rating_summary = [
         {rating: 'Awesome (5)', score: 64},
         {rating: 'Great (4)', score: 25},
@@ -41,6 +64,7 @@ export default function CourseReview(props) {
         {rating: 'Okay (2)', score: 1},
         {rating: 'Awful (1)', score: 5}
     ]
+
     const reviews = [
         {
             quality:4, 
@@ -54,9 +78,9 @@ export default function CourseReview(props) {
             project:'Yes',
             content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et tortor nec justo vulputate molestie. Pellentesque venenatis, sem id volutpat venenatis, turpis lorem convallis nisi, porta sollicitudin nisi leo ac ligula. Quisque sed nibh pellentesque, porta leo at, luctus orci. Donec ac varius turpis. Cras et sem sit amet justo aliquam commodo. Integer laoreet et nunc nec laoreet. Cras et interdum metus. Maecenas tempus at risus et bibendum. Nunc vitae nunc nisi. Pellentesque iaculis vel lectus eu semper. Sed euismod eleifend laoreet. Fusce vel nisi est. Praesent nec dolor ac mi condimentum elementum. Proin non iaculis ante, eu tristique velit.',
             tags: [
-                {tagname: 'boring', type: 'bad'},
-                {tagname: 'awesome', type: 'good'},
-                {tagname: 'okayish', type: 'average'}
+                'Graded By Few Things',
+                'Beware Of Surprise Quizzes',
+                'Test Heavy'
         ]}
     ]
 
@@ -196,15 +220,18 @@ export default function CourseReview(props) {
                                 {/* Things to do
                                 Fetch these tags from backend */}
                                 {tags.map(
-                                    tag => {return(
-                                        <Tag size={'md'} key={tag.tagname} variant='solid' 
-                                            colorScheme = {
-                                            tag.type.toLowerCase()=="bad" ? "red" 
-                                            : tag.type.toLowerCase()=='good' ? "green" 
-                                            : "orange"}
-                                        >
-                                                {tag.tagname}
-                                        </Tag>
+                                    tag => {
+                                        var tag_type = tags_list[tag]
+                                        console.log(tag)
+                                        return(
+                                            <Tag size={'md'} key={tag} variant='solid' 
+                                                colorScheme = {
+                                                tag_type.toLowerCase()=="bad" ? "red" 
+                                                : tag_type.toLowerCase()=='good' ? "green" 
+                                                : "orange"}
+                                            >
+                                                    {tag}
+                                            </Tag>
                                     )}
                                 )
                                 }

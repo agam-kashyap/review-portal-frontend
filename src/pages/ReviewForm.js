@@ -74,7 +74,6 @@ export default function ReviewForm(props) {
     const tags_list = ['Tough Grader',
     'Get Ready To Read',
     'Participation Matters',
-    'Extra Credit',
     'Group Projects',
     'Amazing Lectures',
     'Clear Grading Criteria',

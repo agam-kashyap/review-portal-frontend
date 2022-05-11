@@ -17,8 +17,8 @@ import {
 } from '@chakra-ui/react'
 
 export function Question(props) {
-    const {question, answer} = props;
-    return(
+    const { question, answer } = props;
+    return (
         <HStack>
             <Text as='span' fontSize={'xs'}>{question}:</Text>
             <Text as='span' fontSize={'xs'} fontWeight={'bold'}>{answer}</Text>
@@ -27,27 +27,49 @@ export function Question(props) {
 }
 
 export default function ReviewDescription(props) {
-    const {recommended, grading, attendance, project, content, tags} = props;
-    return(
+    const { recommended, grading, attendance, project, content, tags } = props;
+    const questions = [
+        { question: 'Recommended', answer: recommended },
+        { question: 'Grading', answer: grading },
+        { question: 'Attendance', answer: attendance },
+        { question: 'Project', answer: project }
+    ]
+
+    var tags_list = {
+        'Tough Grader': 'bad' ,
+        'Get Ready To Read': 'bad' ,
+        'Participation Matters': 'bad' ,
+        'Group Projects': 'average' ,
+        'Amazing Lectures': 'good' ,
+        'Clear Grading Criteria': 'good' ,
+        'Gives Good Feedback': 'good' ,
+        'Inspirational': 'good' ,
+        'Lots Of Homework': 'bad' ,
+        'Hilarious': 'average' ,
+        'Beware Of Surprise Quizzes': 'bad' ,
+        'So Many Papers': 'bad' ,
+        'Caring': 'good' ,
+        'Respected': 'good' ,
+        'Lecture Heavy': 'bad' ,
+        'Test Heavy': 'bad' ,
+        'Graded By Few Things': 'average'
+    }
+    return (
         <VStack spacing={6} alignItems={'left'}>
             {/* Subquestions */}
             <SimpleGrid
                 columns={{ base: 1, sm: 2, md: 2, lg: 4, xl: 4, "2xl": 4 }}
             >
-                {[
-                    {question: 'Recommended', answer: recommended},
-                    {question: 'Grading', answer: grading},
-                    {question: 'Attendance', answer: attendance},
-                    {question: 'Project', answer: project}
-                ].map(
+                {questions.map(
                     subquestion => {
-                    return(
-                        <Question 
-                            key={subquestion.question}
-                            question={subquestion.question}
-                            answer={subquestion.answer}
-                        />
-                    )}
+                        return (
+                            <Question
+                                key={subquestion.question}
+                                question={subquestion.question}
+                                answer={subquestion.answer}
+                            />
+                        )
+                    }
                 )}
             </SimpleGrid>
             {/* Content */}
@@ -56,23 +78,26 @@ export default function ReviewDescription(props) {
             </Text>
             {/* Tags */}
             <HStack>
-                {   tags.map(
-                        tag => {return(
-                            <Tag size={'md'} key={tag.tagname} variant='solid' 
-                                colorScheme = {
-                                tag.type.toLowerCase()=="bad" ? "red" 
-                                : tag.type.toLowerCase()=='good' ? "green" 
-                                : "orange"}
+                {tags.map(
+                    tag => {
+                        var tag_type = tags_list[tag]
+                        return (
+                            <Tag size={'md'} key={tag} variant='solid'
+                                colorScheme={
+                                    tag_type.toLowerCase() == "bad" ? "red"
+                                        : tag_type.toLowerCase() == 'good' ? "green"
+                                            : "orange"}
                             >
-                                    {tag.tagname}
+                                {tag}
                             </Tag>
-                        )}
-                    )
+                        )
+                    }
+                )
                 }
             </HStack>
             <Flex>
 
             </Flex>
         </VStack>
-    )    
+    )
 }

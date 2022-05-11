@@ -39,10 +39,36 @@ function truncate(str) {
 
 export default function ProfessorReview(props) {
     const { colorMode } = useColorMode()
-    const { metadata, tags, reviews } = props;
+    const { metadata, tag, reviews } = props;
     const courses_offered = [
         "High Performance Computing and Specialisation in some thing related to computing",
         "Some random course"
+    ]
+
+    const tags_list = [
+        { 'Tough Grader': 'bad' },
+        { 'Get Ready To Read': 'bad' },
+        { 'Participation Matters': 'bad' },
+        { 'Group Projects': 'average' },
+        { 'Amazing Lectures': 'good' },
+        { 'Clear Grading Criteria': 'good' },
+        { 'Gives Good Feedback': 'good' },
+        { 'Inspirational': 'good' },
+        { 'Lots Of Homework': 'bad' },
+        { 'Hilarious': 'average' },
+        { 'Beware Of Surprise Quizzes': 'bad' },
+        { 'So Many Papers': 'bad' },
+        { 'Caring': 'good' },
+        { 'Respected': 'good' },
+        { 'Lecture Heavy': 'bad' },
+        { 'Test Heavy': 'bad' },
+        { 'Graded By Few Things': 'average' }
+    ]
+
+    const tags = [
+        'Graded By Few Things',
+        'Beware Of Surprise Quizzes',
+        'Test Heavy'
     ]
 
     // filter from metadata
@@ -180,20 +206,18 @@ export default function ProfessorReview(props) {
                             >
                                 {/* Things to do
                                 Fetch these tags from backend */}
-                                {[
-                                    {tagname: 'boring', type: 'bad'},
-                                    {tagname: 'awesome', type: 'good'},
-                                    {tagname: 'okayish', type: 'average'}
-                                ].map(
-                                    tag => {return(
-                                        <Tag size={'md'} key={tag.tagname} variant='solid' 
-                                            colorScheme = {
-                                            tag.type.toLowerCase()=="bad" ? "red" 
-                                            : tag.type.toLowerCase()=='good' ? "green" 
-                                            : "orange"}
-                                        >
-                                                {tag.tagname}
-                                        </Tag>
+                                {tags.map(
+                                    tag => {
+                                        var tag_type = tags_list[tag]
+                                        return(
+                                            <Tag size={'md'} key={tag} variant='solid' 
+                                                colorScheme = {
+                                                tag_type.toLowerCase()=="bad" ? "red" 
+                                                : tag_type.toLowerCase()=='good' ? "green" 
+                                                : "orange"}
+                                            >
+                                                    {tag}
+                                            </Tag>
                                     )}
                                 )
                                 }
