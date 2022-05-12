@@ -45,7 +45,7 @@ export default function ProfessorReview(props) {
     useEffect(() => {
         axios
             .get(
-                "http://localhost:3001/profs/"+params.id
+                "http://52.158.131.5:3000/profs/"+params.id
             )
             .then((res) => {
                 setProfData(res.data);

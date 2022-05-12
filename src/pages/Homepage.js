@@ -34,7 +34,7 @@ export default function Homepage() {
     useEffect(() => {
         axios
             .get(
-                "http://localhost:3001/profs"
+                "http://52.158.131.5:3000/profs"
             )
             .then((res) => {
                 setProfessors(res.data);

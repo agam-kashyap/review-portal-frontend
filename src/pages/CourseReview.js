@@ -30,7 +30,7 @@ export default function CourseReview(props) {
     useEffect(() => {
         axios
             .get(
-                "http://localhost:3001/courses/"+params.id
+                "http://52.158.131.5:3000/courses/"+params.id
             )
             .then((res) => {
                 setCourseData(res.data);
