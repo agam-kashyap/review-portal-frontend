@@ -114,8 +114,6 @@ export default function Homepage() {
                         spacing={8}
                         alignItems={'center'}
                     >
-
-                        {console.log(professors.map(prof => prof.prof_name))}
                         <FormControl p={4}>
                             <Select
                                 id="prof-select"

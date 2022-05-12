@@ -26,9 +26,10 @@ export default function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     function handleSubmit() {
-        console.log(email, password)
+        console.log(email, password, name, username)
     }
 
     return (
@@ -52,21 +53,39 @@ export default function SignUp() {
                         bg={useColorModeValue('white', 'gray.700')}
                         borderWidth='1.5px'
                         borderStyle='solid'
-                        borderColor={'black'} 
+                        borderColor={'black'}
                         boxShadow={'lg'}
                         p={8}>
                         <Stack spacing={4}>
+                            <HStack>
+                                <Box>
+                                    <FormControl id="name" isRequired>
+                                        <FormLabel>Name</FormLabel>
+                                        <Input 
+                                        onChange={e => setName(e.target.value)}
+                                        type="text" />
+                                    </FormControl>
+                                </Box>
+                                <Box>
+                                    <FormControl id="username" isRequired>
+                                        <FormLabel>Username</FormLabel>
+                                        <Input 
+                                        onChange={e => setUsername(e.target.value)}
+                                        type="text" />
+                                    </FormControl>
+                                </Box>
+                            </HStack>
                             <FormControl id="email" isRequired>
                                 <FormLabel>Email address</FormLabel>
                                 <Input
                                     onChange={e => setEmail(e.target.value)}
-                                    type="email" 
+                                    type="email"
                                 />
                             </FormControl>
                             <FormControl id="password" isRequired>
                                 <FormLabel>Password</FormLabel>
                                 <InputGroup>
-                                    <Input 
+                                    <Input
                                         onChange={e => setPassword(e.target.value)}
                                         type={showPassword ? 'text' : 'password'} />
                                     <InputRightElement h={'full'}>
@@ -95,7 +114,7 @@ export default function SignUp() {
                             </Stack>
                             <Stack pt={6}>
                                 <Text align={'center'}>
-                                    Already a user? 
+                                    Already a user?
                                     <Link color={'blue.400'} href='/login'> Login</Link>
                                 </Text>
                             </Stack>
