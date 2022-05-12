@@ -1,72 +1,107 @@
-import {
-    Box,
-    Stack,
-    Heading,
-    Text,
-    Button,
-    Icon,
-    useColorModeValue
-} from '@chakra-ui/react';
-
 import Container from '../components/Container';
 import { SiMicrosoftoutlook } from "react-icons/si";
 
+import {
+    Flex,
+    Box,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputRightElement,
+    Stack,
+    Button,
+    Heading,
+    Text,
+    useColorModeValue,
+    Link,
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+
+// Things to do
+// Verify using a link
 export default function SignUp() {
-    const outlookBg = "#005A9F";
-    const outlookText = "gray.100";
-    const outlookHover = { bg: "#005ACF" };
-    const outlookActive = { bg: "#005A9F" };
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleSubmit() {
+        console.log(email, password)
+    }
 
     return (
         <Container>
-            <Box position={'relative'} 
-                py={10} 
-                align='center'
+            <Flex
+                minW={'50vw'}
+                align={'center'}
+                justify={'center'}
             >
-                <Stack
-                    bg={'gray.50'}
-                    rounded={'xl'}
-                    p={{ base: 4, sm: 6, md: 12 }}
-                    spacing={{ base: 8 }}
-                    maxW={{ lg: 'lg' }}                
-                    borderRadius='16px'
-                    borderWidth='1.5px'
-                    borderStyle='solid'
-                    borderColor={'black'}    
-                >
-                    <Stack spacing={8}>
-                        <Heading
-                            color={'gray.800'}
-                            lineHeight={1.6}
-                            fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
+                <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                    <Stack align={'center'}>
+                        <Heading fontSize={'4xl'} textAlign={'center'}>
                             Login
                         </Heading>
-                        <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-                            Login using your IIITB's Outlook mail ID to access
-                            further resources on the website.
+                        <Text fontSize={'lg'} color={'gray.600'}>
+                            to access the reviews
                         </Text>
                     </Stack>
-                    <Box as={'form'}>
-                        <Button
-                            fontSize='sm'
-                            me='0px'
-                            mb='26px'
-                            py='15px'
-                            h='50px'
-                            borderRadius='16px'
-                            bg={outlookBg}
-                            color={outlookText}
-                            _hover={outlookHover}
-                            _active={outlookActive}
-                            _focus={outlookActive}
-                            fontWeight='500'
-                        >
-                            <Icon as={SiMicrosoftoutlook} w='20px' h='20px' me='10px' />
-                            Login using Outlook
-                        </Button>
+                    <Box
+                        rounded={'lg'}
+                        bg={useColorModeValue('white', 'gray.700')}
+                        borderWidth='1.5px'
+                        borderStyle='solid'
+                        borderColor={'black'} 
+                        boxShadow={'lg'}
+                        p={8}>
+                        <Stack spacing={4}>
+                            <FormControl id="email" isRequired>
+                                <FormLabel>Email address</FormLabel>
+                                <Input
+                                    onChange={e => setEmail(e.target.value)}
+                                    type="email" 
+                                />
+                            </FormControl>
+                            <FormControl id="password" isRequired>
+                                <FormLabel>Password</FormLabel>
+                                <InputGroup>
+                                    <Input 
+                                        onChange={e => setPassword(e.target.value)}
+                                        type={showPassword ? 'text' : 'password'} />
+                                    <InputRightElement h={'full'}>
+                                        <Button
+                                            variant={'ghost'}
+                                            onClick={() =>
+                                                setShowPassword((showPassword) => !showPassword)
+                                            }>
+                                            {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
+                            </FormControl>
+                            <Stack spacing={10} pt={2}>
+                                <Button
+                                    onClick={handleSubmit}
+                                    loadingText="Submitting"
+                                    size="lg"
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}>
+                                    Login
+                                </Button>
+                            </Stack>
+                            <Stack pt={6}>
+                                <Text align={'center'}>
+                                    Not a user?
+                                    <Link color={'blue.400'} href='/signup'> Signup</Link>
+                                </Text>
+                            </Stack>
+                        </Stack>
                     </Box>
                 </Stack>
-            </Box>
+            </Flex>
         </Container>
     );
 }
