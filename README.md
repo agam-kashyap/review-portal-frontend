@@ -42,7 +42,7 @@ Find the docker image on https://hub.docker.com/r/keiserdocker/selec-frontend
 
 Landing Page(Dark)             |  Edit Review(Light)
 :-------------------------:|:-------------------------:
-![Landing Page](https://github.com/DaKeiser/review-portal-frontend/blob/main/assets/landingpage.png)  |  ![Edit Review](https://github.com/DaKeiser/review-portal-frontend/blob/main/assets/selecttags.png)
+![Landing Page](https://github.com/agam-kashyap/review-portal-frontend/blob/main/assets/landingpage.png)  |  ![Edit Review](https://github.com/agam-kashyap/review-portal-frontend/blob/main/assets/selecttags.png)
 
 ## Disclaimer
 
