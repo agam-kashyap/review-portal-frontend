@@ -32,6 +32,7 @@ export function Question(props) {
 export default function ProfessorReviewDescription(props) {
     const { colorMode } = useColorMode()
     const { cname, recommended, grading, attendance, project, content, tags } = props;
+    console.log(cname, recommended, grading, attendance, project, content, tags)
     const questions = [
         { question: 'Recommended', answer: recommended },
         { question: 'Grading', answer: grading },
@@ -42,6 +43,8 @@ export default function ProfessorReviewDescription(props) {
     var tags_list = {
         'awesome': 'good',
         'helpful': 'good',
+        'wow': 'good',
+        'great': 'good',
         'good Listener': 'good',
         'Tough Grader': 'bad' ,
         'Get Ready To Read': 'bad' ,
@@ -91,7 +94,6 @@ export default function ProfessorReviewDescription(props) {
             <HStack>
                 {tags.map(
                     tag => {
-                        console.log('hey_ya', tag, tags_list, tags_list[tag])
                         var tag_type = tags_list[tag]
                         return (
                             <Tag size={'md'} key={tag} variant='solid'

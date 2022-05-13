@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react'
 
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 import Card from "../components/Card";
 import Container from "../components/Container";
@@ -45,6 +47,11 @@ export function NewCard({ children }) {
 // course_tags
 
 export default function ReviewForm(props) {
+
+    const {state} = useLocation();
+    const navigate = useNavigate();
+    const { cid_set, cname_set } = state;
+
     // Can choose to load some data from API like course_name
     const {
         course_name,
@@ -140,11 +147,42 @@ export default function ReviewForm(props) {
     const [grade, setGrade] = useState(course_grade);
     const [tags, setTags] = useState((course_tags) => course_tags==undefined?[]:course_tags);
     const [review, setReview] = useState(course_review);
+    const [grading, setGradingPattern] = useState('lenient');
 
     function handleFormSubmit() {
-        console.log(
-            recommended, attendance, cpReqd, review, attendance, grade, tags
-        )
+        var recommended_submit = recommended=='Yes'? true : false;
+        var attendance_submit = attendance=='Yes'? true : false;
+        var cpReqd_submit = cpReqd=='Yes'? true : false;
+        var rating_block = {
+            review_user: "626a936f2d650e8911e4a066",
+            review_course: cid_set,
+            upvote: 0,
+            downvote: 0,
+            date: "2022-05-05T16:40:22.234+00:00",
+            prof_rate: quality,
+            takeAgain: recommended_submit,
+            quality: quality,
+            difficulty: difficulty,
+            grading: grading,
+            attendance: attendance_submit,
+            project: cpReqd_submit,
+            tags: tags,
+            content: review
+        }
+        axios("http://52.158.131.5:3000/review/add",{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            data: rating_block,
+        })
+        .then((result) => {
+            console.log('Success:', result);
+            navigate('/course/'+cid_set)
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
     
     return (
@@ -154,7 +192,7 @@ export default function ReviewForm(props) {
                 <NewCard key='cname'>
                     <FormControl>
                         <FormLabel htmlFor='course'>Course Name</FormLabel>
-                        <Select id='course' placeholder={course_name}>
+                        <Select id='course' placeholder={cname_set} defaultValue={cname_set}>
                             {courses.map(course => 
                                     <option>{course.name}</option>
                                 )
@@ -230,6 +268,19 @@ export default function ReviewForm(props) {
                                 <HStack spacing='24px' justify='start'>
                                     <Radio value='Yes'>Yes</Radio>
                                     <Radio value='No'>No</Radio>
+                                </HStack>
+                            </RadioGroup>
+                        </FormControl>
+                    </NewCard>
+
+                    <NewCard key='grading'>
+                        <FormControl isRequired>
+                            <FormLabel as='legend'>How is the grading?</FormLabel>
+                            <RadioGroup defaultValue={'lenient'} onChange={setGradingPattern}>
+                                <HStack spacing='24px' justify='start'>
+                                    <Radio value='lenient'>Lenient</Radio>
+                                    <Radio value='moderate'>Moderate</Radio>
+                                    <Radio value='strict'>Strict</Radio>
                                 </HStack>
                             </RadioGroup>
                         </FormControl>

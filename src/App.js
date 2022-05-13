@@ -40,6 +40,7 @@ function App() {
                         course_review="Lorem Ipsum"
                         course_tags={['Get Ready To Read', 'Participation Matters', 'Group Projects']}
                     />} />
+                <Route path="/404" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
