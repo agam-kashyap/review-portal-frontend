@@ -2,7 +2,7 @@
 
 > Developed as a part of CS 816 - Software Production Engineering course.
 
-![CI Badge](https://github.com/agam-kashyap/review-portal-frontend/actions/workflows/frontend-ci.yml)
+![CI Badge](https://github.com/agam-kashyap/review-portal-frontend/actions/workflows/frontend-ci.yml/badge.svg)
 
 ## Install
 
