@@ -1,5 +1,6 @@
 import Container from '../components/Container';
 import { SiMicrosoftoutlook } from "react-icons/si";
+import axios from "axios";
 
 import {
     Flex,
@@ -28,9 +29,60 @@ export default function SignUp() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
-    function handleSubmit() {
-        console.log(email, password, name, username)
-    }
+    const http = axios.create({
+		baseURL: "http://52.158.131.5:3000",
+		headers: {
+			"content-type": "application/json"
+		}
+	});
+    const payload = JSON.stringify({
+        "username": username,
+        "password" : password,
+        "email" : email,
+        "name": name
+    });
+    const handleSubmit = () => {
+		
+		axios("http://52.158.131.5:3000/users/register",{
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                data: payload,
+            })
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+	};
+
+    // let axiosConfig = {
+    //     headers: {
+    //         'Content-Type': 'application/json;charset=UTF-8',
+    //         "Access-Control-Allow-Origin": "*",
+    //     }
+    //   };
+    // const handleSubmit = async (e)=> {
+    //     e.preventDefault();
+    //     const response = await axios.post('/users/register', {
+    //         username: username,
+    //         email: email,
+    //         name: name,
+    //         password: password,
+    //     }, axiosConfig)
+    //     .then(function(response){
+    //         console.log(response);
+    //         setName("");
+    //         setEmail("");
+    //         setUsername("");
+    //         setPassword("");
+    //     })
+    //     .catch(function(error){
+    //         console.log(error)
+    //     });
+    // }
 
     return (
         <Container>

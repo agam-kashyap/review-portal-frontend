@@ -19,6 +19,7 @@ import {
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
+import axios from "axios"
 // Things to do
 // Verify using a link
 export default function SignUp() {
@@ -26,9 +27,28 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function handleSubmit() {
-        console.log(email, password)
-    }
+    const payload = JSON.stringify({
+        "password" : password,
+        "email" : email,
+    });
+
+    const handleSubmit = () => {
+		
+		axios("http://52.158.131.5:3000/users/login",{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            data: payload,
+        })
+			.then((response) => response.json)
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+	};
 
     return (
         <Container>
